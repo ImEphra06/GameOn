@@ -6,6 +6,7 @@ const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const listBtnRadio = document.querySelectorAll("input[type=radio]");
 const checkbox1 = document.getElementById("checkbox1");
+let balise;
 //const form = document.querySelector(".formData");
 
 // Definition of Regular Expression
@@ -26,13 +27,9 @@ function checkFirstName(balise) {
     }
 
     if(regex.test(balise.value)) {
-        regex.parentElement.setAttribute("data-error-visible", "true");
+        throw new Error("Le champ ${firstName} doit commencé par une majuscule")
         regex.style.border = "3px solid #E8071E";
         return false;
-    } else {
-        regex.parentElement.setAttribute("data-error-visible", "false");
-        regex.style.border = "3px solid #279E7A";
-        return true;
     }
 }
 
@@ -54,13 +51,9 @@ function checkLastName() {
     }
 
     if(regex.test(balise.value)) {
-        regex.parentElement.setAttribute("data-error-visible", "true");
+        throw new Error("Le champ ${lastName} doit commencé par une majuscule")
         regex.style.border = "3px solid #E8071E";
         return false;
-    } else {
-        regex.parentElement.setAttribute("data-error-visible", "false");
-        regex.style.border = "3px solid #279E7A";
-        return true;
     }
 }
 
