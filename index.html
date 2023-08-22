@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <title>Reservation</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="../CSS/modal.css" />
+  <link rel="stylesheet" href="CSS/modal.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet" />
 </head>
@@ -13,7 +13,7 @@
 <body>
   <div class="topnav" id="myTopnav">
     <div class="header-logo">
-      <img alt="logo" src="../images/Logo.png" width="auto" height="auto" />
+      <img alt="logo" src="images/Logo.png" width="auto" height="auto" />
     </div>
 
     <div class="main-navbar">
@@ -36,7 +36,7 @@
         <button class="btn-signup modal-btn">je m'inscris</button>
       </div>
 
-      <div class="hero-img"><img src="../images/bg_img.jpg" alt="img" /></div>
+      <div class="hero-img"><img src="images/bg_img.jpg" alt="img" /></div>
 
       <button class="btn-signup modal-btn">je m'inscris</button>
     </div>
@@ -52,27 +52,27 @@
 
             <div class="formData">
               <label>Prénom</label><br>
-              <input class="text-control" type="text" id="first" name="first" minlength="2" /><br>
+              <input class="text-control" type="text" id="first" name="first" minlength="2" onchange="checkFirstName()"/><br>
             </div>
 
             <div class="formData">
               <label>Nom</label><br>
-              <input class="text-control" type="text" id="last" name="last" /><br>
+              <input class="text-control" type="text" id="last" name="last" onchange="checkLastName()"/><br>
             </div>
 
             <div class="formData">
               <label>E-mail</label><br>
-              <input class="text-control" type="email" id="email" name="email" /><br>
+              <input class="text-control" type="email" id="email" name="email" onchange="checkEmail()"/><br>
             </div>
 
             <div class="formData">
               <label>Date de naissance</label><br>
-              <input class="text-control" type="date" id="birthdate" name="birthdate" /><br>
+              <input class="text-control" type="date" id="birthdate" name="birthdate" onchange="checkBirthdate()"/><br>
             </div>
 
             <div class="formData">
               <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-              <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+              <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" onchange="checkQuantity()">
             </div>
 
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
@@ -99,7 +99,7 @@
             </div>
 
             <div class="formData">
-              <input class="checkbox-input" type="checkbox" id="checkbox1" checked />
+              <input class="checkbox-input" type="checkbox" id="checkbox1" name="condition" checked />
               <label class="checkbox2-label" for="checkbox1" required>
                 <span class="checkbox-icon"></span>
                 J'ai lu et accepté les conditions d'utilisation.
@@ -117,23 +117,9 @@
 
           </form>
         </div>
+        <div class="message-valid"></div>
       </div>
     </div>
-
-    <!-- CONFIRMATION SUBMIT -->
-    <div class="confirmationSubmit">
-      <div class="submitted-form">
-        <span class="closeModalSubmit"></span>
-        <p>
-          Merci !
-          <br>
-          Votre réservation a été reçue.
-        </p>
-        <button id="closeBtnConfirmation"> Fermer
-        </button>
-      </div>
-    </div>
-
   </main>
 
   <footer>
@@ -142,8 +128,8 @@
     </p>
   </footer>
 
-  <script src="../JavaScript/modal.js"></script>
-  <script src="../JavaScript/validation.js"></script>
+  <script src="JavaScript/modal.js"></script>
+  <script src="JavaScript/validation.js"></script>
 
 </body>
 

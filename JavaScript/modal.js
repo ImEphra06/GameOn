@@ -17,6 +17,11 @@ function closeModal () {
   modalbg.style.display = "none";
 }
 
+function closeModalReload() {
+  modalbg.style.display = "none";
+  window.location.reload();
+}
+
 closeBtn.addEventListener("click", closeModal);
 
 // Edit nav
