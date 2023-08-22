@@ -159,7 +159,8 @@ function sendForm() {
 
 /***** Message form sent *****/
 function sendFormMessage() {
-    messageValid.innerHTML = "<p>Merci d'avoir soumis vos informations d'inscription</p>" + '<button class="btn-close" onclick="closeModalReload()" class="button">Fermer</button>';
+    const checkMessage = document.querySelector(".message-valid");
+    checkMessage.innerHTML = "<p>Merci d'avoir soumis vos informations d'inscription</p>" + '<button class="btn-close" onclick="closeModalReload()" class="button">Fermer</button>';
     form.reset();
 }
 
