@@ -9,16 +9,6 @@ function editNav() {
 }
 
 
-/*---------- LAUNCHING OF MODAL ----------*/
-//Launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-
-// Launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
-}
-
-
 /*----------  DOM ELEMENTS ----------*/
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -26,43 +16,59 @@ const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelector(".close");
 
 
-/*---------- DEFINITION OF FONCTION ERROR AND VALIDATION ----------*/
-function setErreur(input, message) {
-    const formDataInput = input.parentElement; // Select input
-    const small = formDataInput.querySelector('small'); // Select div for error message
-  
-    small.innerText = message; // The message will be writing later
-    input.className = 'text-control input-error';
-}
+/*---------- LAUNCHING OF MODAL ----------*/
+/*****Launch modal event *****/
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-function setValid(input) {
-    const formDataInput = input.parentElement; // Select input
-    const small = formDataInput.querySelector('small'); // Select div for error message
+/***** Form sumit *****/
+reserve.addEventListener('submit', (e) => {
+    e.preventDefault();
   
-    small.innerText = " "; // Reset error message
-    input.className = 'text-control input-valid';
-}
+    validate();
+  
+    if (_firstName === true && 
+        _lastName === true && 
+        _email === true && 
+        _birthdate === true && 
+        _quantity === true && 
+        _location === true && 
+        _condition === true) {
+      sendForm();
+      sendFormMessage();
+    }
+})
 
-// SetErreur validation pour les checkboxs
-function setErreurCheckbox(input, message) {
-    const formDataInput = input.parentElement; // Select input
-    const small = formDataInput.querySelector('small'); // Select div for error message
-  
-    small.innerText = message; // The message will be writing later
-}
-function setValidCheckbox(input) {
-    const formDataInput = input.parentElement; // Select input
-    const small = formDataInput.querySelector('small'); // Select div for error message
-  
-    small.innerText = " "; // Reset error message
-}
+/***** Close modal event *****/
+closeBtn.addEventListener("click", closeModal);
 
 
-/*---------- VALIDATION OF ALL FIELDS ----------*/
+/*---------- MODAL DISPLAY AND VALIDATION OF FIELD ----------*/
+/***** Launch modal form *****/
+function launchModal() {
+  modalbg.style.display = "block";
+}
+
+let _firstName = checkFirstName();
+let _lastName = checkLastName();
+let _email = checkEmail();
+let _birthdate = checkBirthdate();
+let _quantity = checkQuantity();
+let _location = checkLocation();
+let _condition = checkCondition();
+
+/***** All fields are validate *****/
+function validate() {
+    _firstName;
+    _lastName;
+    _email;
+    _birthdate;
+    _quantity;
+    _location;
+    _condition
+}
+
 // Definition of Regular Expression
 let regex = /^[A-Z][a-z]+([\-'\s][a-z]+)*$/;
-let emailRegExp = new RegExp(/^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/);
-
 
 /*****  First name validation *****/
 function checkFirstName() {
@@ -70,7 +76,7 @@ function checkFirstName() {
     if (firstName.value.trim().length < 2) {
         setErreur(firstName, "Veuillez entrer 2 caractères ou plus pour le champ du prenom.");
         return false;
-    } else if (regex.test(firstName.value)) {
+    } else if (!regex.test(firstName.value)) {
         setErreur(firstName, "Veuillez entrer un prénom valide.");
         return false;
     } else {
@@ -85,7 +91,7 @@ function checkLastName() {
     if (lastName.value.trim().length < 2) {
         setErreur(lastName, "Veuillez entrer 2 caractères ou plus pour le champ du prenom.");
         return false;
-    } else if (regex.test(lastName.value)) {
+    } else if (!regex.test(lastName.value)) {
         setErreur(lastName, "Veuillez entrer un prénom valide.");
         return false;
     } else {
@@ -96,12 +102,13 @@ function checkLastName() {
  
 /***** Email validation *****/
 function checkEmail() {
+    let emailRegExp = new RegExp(/^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$/);
     const email = document.forms["reserve"].email;
     if (emailRegExp.test(email.value)) {
         setValid(email);
         return true;
     } else {
-        setErreur(email, "Veuillez renseigner un E-mail valide.");
+        setErreur(email, "Veuillez renseigner un e-mail valide.");
         return false;
     }
 }
@@ -132,7 +139,7 @@ function checkQuantity() {
     const quantity = document.forms["reserve"].quantity;
     const q = parseInt(quantity.value);
     if (isNaN(q) || (q < 0) || (q > 99)) {
-        setErreur(quantity, "Veuillez renseigner a combien de tournois GameOn avez-vous déjà participé.");
+        setErreur(quantity, "Veuillez renseigner a combien de tournois vous avez participé.");
         return false;
     } else {
         setValid(quantity);
@@ -166,27 +173,39 @@ function checkCondition() {
 }
 
 
-/*---------- Validation and sending of the form ----------*/
-
-let _firstName = checkFirstName();
-let _lastName = checkLastName();
-let _email = checkEmail();
-let _birthdate = checkBirthdate();
-let _quantity = checkQuantity();
-let _location = checkLocation();
-let _condition = checkCondition();
-
-/***** All fields are validate *****/
-function validate() {
-    _firstName;
-    _lastName;
-    _email;
-    _birthdate;
-    _quantity;
-    _location;
-    _condition
+/*---------- DEFINITION OF FONCTION ERROR AND VALIDATION ----------*/
+function setErreur(input, message) {
+    const formDataInput = input.parentElement; // Select input
+    const small = formDataInput.querySelector('small'); // Select div for error message
+  
+    small.innerText = message; // The message will be writing later
+    input.className = 'text-control input-error';
 }
 
+function setValid(input) {
+    const formDataInput = input.parentElement; // Select input
+    const small = formDataInput.querySelector('small'); // Select div for error message
+  
+    small.innerText = " "; // Reset error message
+    input.className = 'text-control input-valid';
+}
+
+// SetErreur validation for checkbox
+function setErreurCheckbox(input, message) {
+    const formDataInput = input.parentElement; // Select input
+    const small = formDataInput.querySelector('small'); // Select div for error message
+  
+    small.innerText = message; // The message will be writing later
+}
+function setValidCheckbox(input) {
+    const formDataInput = input.parentElement; // Select input
+    const small = formDataInput.querySelector('small'); // Select div for error message
+  
+    small.innerText = " "; // Reset error message
+}
+
+
+/****** FORM SENDED AND COMPLETED *****/
 /***** Form sent *****/
 function sendForm() {
     modalBody.classList.add('not-active');
@@ -199,38 +218,15 @@ function sendFormMessage() {
     form.reset();
 }
 
-/***** Form sumit *****/
-reserve.addEventListener('submit', (e) => {
-    e.preventDefault();
-  
-    validate();
-  
-    if (_firstName === true && 
-        _lastName === true && 
-        _email === true && 
-        _birthdate === true && 
-        _quantity === true && 
-        _location === true && 
-        _condition === true) {
-      sendForm();
-      sendFormMessage();
-    }
-})
-
-
-/*---------- CLOSING OF MODAL ----------*/
 // Close modal
 function closeModal () {
     modalbg.style.display = "none";
-  }
+}
   
-  function closeModalReload() {
+function closeModalReload() {
     modalbg.style.display = "none";
     window.location.reload();
-  }
-  
-  closeBtn.addEventListener("click", closeModal);
-  
+}
 // onsubmit = return validate()
 // il faut que validate renvoie false
 // validate() doit savoir s'il y a un problème de validation
