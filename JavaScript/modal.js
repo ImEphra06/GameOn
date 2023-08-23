@@ -11,6 +11,7 @@ function editNav() {
 
 /*----------  DOM ELEMENTS ----------*/
 const modalbg = document.querySelector(".bground");
+const modalBody = document.querySelector(".modal-body");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelector(".close");
@@ -48,23 +49,24 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-let _firstName = checkFirstName();
-let _lastName = checkLastName();
-let _email = checkEmail();
-let _birthdate = checkBirthdate();
-let _quantity = checkQuantity();
-let _location = checkLocation();
-let _condition = checkCondition();
+let _firstName = true;
+let _lastName = true;
+let _email = true;
+let _birthdate = true;
+let _quantity = true;
+let _location = true;
+let _condition = true;
 
 /***** All fields are validate *****/
 function validate() {
-    _firstName;
-    _lastName;
-    _email;
-    _birthdate;
-    _quantity;
-    _location;
-    _condition
+
+    _firstName = checkFirstName();
+    _lastName = checkLastName();
+    _email = checkEmail();
+    _birthdate = checkBirthdate();
+    _quantity = checkQuantity();
+    _location = checkLocation();
+    _condition = checkCondition();
 }
 
 // Definition of Regular Expression
@@ -74,7 +76,7 @@ let regex = /^[A-Z][a-z]+([\-'\s][a-z]+)*$/;
 function checkFirstName() {
     const firstName = document.forms["reserve"].first;
     if (firstName.value.trim().length < 2) {
-        setErreur(firstName, "Veuillez entrer 2 caractères ou plus pour le champ du prenom.");
+        setErreur(firstName, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
         return false;
     } else if (!regex.test(firstName.value)) {
         setErreur(firstName, "Veuillez entrer un prénom valide.");
@@ -89,10 +91,10 @@ function checkFirstName() {
 function checkLastName() {
     const lastName = document.forms["reserve"].last;
     if (lastName.value.trim().length < 2) {
-        setErreur(lastName, "Veuillez entrer 2 caractères ou plus pour le champ du prenom.");
+        setErreur(lastName, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
         return false;
     } else if (!regex.test(lastName.value)) {
-        setErreur(lastName, "Veuillez entrer un prénom valide.");
+        setErreur(lastName, "Veuillez entrer un nom valide.");
         return false;
     } else {
         setValid(lastName);
@@ -149,25 +151,25 @@ function checkQuantity() {
 
 /***** Radio Boutton validation *****/
 function checkLocation() {
-    const location = document.forms["reserve"].location.value;
-    if(location === "") {
-        setErreurCheckbox(location, "Veuillez renseigner une localisation.");
+    const location = document.forms["reserve"].location;
+    if(location.value === "") {
+        setErreurRadio(location, "Veuillez renseigner une option.");
         return false;
     }
     else {
-        setValidCheckbox(location);
+        setValidRadio(location);
         return true;
     }
 }
 
 /***** Checkbox1 validation *****/
 function checkCondition() {
-    const condition = document.forms["reserve"].condition.value;
+    const condition = document.forms["reserve"].condition;
     if (condition.checked) {
         setValidCheckbox(condition);
         return true;
     } else {
-        setErreurCheckbox(condition, "Veuillez accepter les conditions d'utilisateur.");
+        setErreurCheckbox(condition, "Veuillez accepter les termes et conditions.");
         return false;
     }
 }
@@ -187,18 +189,45 @@ function setValid(input) {
     const small = formDataInput.querySelector('small'); // Select div for error message
   
     small.innerText = " "; // Reset error message
-    input.className = 'text-control input-valid';
+    //input.className = 'text-control input-valid';
 }
 
-// SetErreur validation for checkbox
-function setErreurCheckbox(input, message) {
-    const formDataInput = input.parentElement; // Select input
+// SetErreur validation for radio
+function setErreurRadio(input, message) {
+    let formDataInput = null;
+    if (input.length) { // if input is an array
+        formDataInput = input[0].parentElement; // Select input
+    } else { // input is an html element
+        formDataInput = input.parentElement; 
+    }
+
     const small = formDataInput.querySelector('small'); // Select div for error message
   
     small.innerText = message; // The message will be writing later
 }
+
+function setValidRadio(input) {
+    let formDataInput = null;
+    if (input.length) { // if input is an array
+        formDataInput = input[0].parentElement; // Select input
+    } else { // input is an html element
+        formDataInput = input.parentElement; 
+    }
+
+    const small = formDataInput.querySelector('small'); // Select div for error message
+  
+    small.innerText = " "; // Reset error message
+}
+
+function setErreurCheckbox(input, message) {
+    const formDataInput = input.parentElement; 
+    const small = formDataInput.querySelector('small'); // Select div for error message
+  
+    small.innerText = message; // The message will be writing later
+}
+
 function setValidCheckbox(input) {
-    const formDataInput = input.parentElement; // Select input
+    const formDataInput = input.parentElement; 
     const small = formDataInput.querySelector('small'); // Select div for error message
   
     small.innerText = " "; // Reset error message
