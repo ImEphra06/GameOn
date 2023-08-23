@@ -71,7 +71,7 @@ function validate() {
 }
 
 // Definition of Regular Expression
-let regex = /^[A-Z][a-z]+([\-'\s][a-z]+)*$/;
+let regex = /^[A-Z][a-z]+([\-'\s][A-Z][a-z]+)*$/;
 
 /*****  First name validation *****/
 function checkFirstName() {
@@ -80,7 +80,7 @@ function checkFirstName() {
         setErreur(firstName, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
         return false;
     } else if (!regex.test(firstName.value)) {
-        setErreur(firstName, "Veuillez entrer un prénom valide.");
+        setErreur(firstName, "Votre prénom doit commencer par une majuscule.");
         return false;
     } else {
         setValid(firstName);
@@ -95,7 +95,7 @@ function checkLastName() {
         setErreur(lastName, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
         return false;
     } else if (!regex.test(lastName.value)) {
-        setErreur(lastName, "Veuillez entrer un nom valide.");
+        setErreur(lastName, "Votre nom doit commencer par une majuscule.");
         return false;
     } else {
         setValid(lastName);
