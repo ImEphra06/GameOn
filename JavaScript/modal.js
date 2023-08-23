@@ -15,6 +15,7 @@ const modalBody = document.querySelector(".modal-body");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelector(".close");
+const form = document.getElementById ("reserve");
 
 
 /*---------- LAUNCHING OF MODAL ----------*/
