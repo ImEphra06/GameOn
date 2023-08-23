@@ -125,7 +125,7 @@ function checkBirthdate() {
     let birthyear = d.getFullYear();
     let now = new Date();
 
-    if (birthdate.value.trim().length === "") {
+    if (birthdate.value === "") {
         setErreur(birthdate, "Veuillez renseigner une date de naissance.");
         return false;
     } else if ((now.getFullYear() - birthyear) < 18) {
@@ -245,7 +245,7 @@ function sendForm() {
 function sendFormMessage() {
     const checkMessage = document.querySelector(".message-valid");
     checkMessage.innerHTML = "<p>Merci d'avoir soumis vos informations d'inscription</p>" + '<button class="btn-close" onclick="closeModalReload()" class="button">Fermer</button>';
-    form.reset();
+    //form.reset();
 }
 
 // Close modal
