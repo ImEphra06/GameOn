@@ -80,7 +80,7 @@ function checkFirstName() {
         setErreur(firstName, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.");
         return false;
     } else if (!regex.test(firstName.value)) {
-        setErreur(firstName, "Votre prénom doit commencer par une majuscule.");
+        setErreur(firstName, "Votre prénom doit commencer par une majuscule et/ou ne doit pas comporter de caractère spécial.");
         return false;
     } else {
         setValid(firstName);
@@ -95,7 +95,7 @@ function checkLastName() {
         setErreur(lastName, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
         return false;
     } else if (!regex.test(lastName.value)) {
-        setErreur(lastName, "Votre nom doit commencer par une majuscule.");
+        setErreur(lastName, "Votre nom doit commencer par une majuscule et/ou ne doit pas comporter de caractère spécial.");
         return false;
     } else {
         setValid(lastName);
