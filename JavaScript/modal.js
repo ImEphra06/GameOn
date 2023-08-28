@@ -190,7 +190,7 @@ function setValid(input) {
     const small = formDataInput.querySelector('small'); // Select div for error message
   
     small.innerText = " "; // Reset error message
-    //input.className = 'text-control input-valid';
+    input.className = 'text-control input-valid';
 }
 
 // SetErreur validation for radio
@@ -244,7 +244,7 @@ function sendForm() {
 /***** Message form sent *****/
 function sendFormMessage() {
     const checkMessage = document.querySelector(".message-valid");
-    checkMessage.innerHTML = "<p>Merci d'avoir soumis vos informations d'inscription</p>" + '<button class="btn-close" onclick="closeModalReload()" class="button">Fermer</button>';
+    checkMessage.innerHTML = "<p>Merci pour votre inscription</p>" + '<button class="btn-close" onclick="closeModalReload()" class="button">Fermer</button>';
     //form.reset();
 }
 
@@ -257,6 +257,3 @@ function closeModalReload() {
     modalbg.style.display = "none";
     window.location.reload();
 }
-// onsubmit = return validate()
-// il faut que validate renvoie false
-// validate() doit savoir s'il y a un problème de validation
